@@ -1,0 +1,130 @@
+@import url('http://fonts.googleapis.com/css?family=Freckle+Face');
+
+body { margin: 0; }
+
+#gameContainer {
+	background: url("images/background.jpg") no-repeat;
+	background-color: black;
+	background-size: contain;
+	background-position: center;
+	height: 100%;
+
+	#intro {
+		text-transform: uppercase;
+		font-family: 'Freckle Face', cursive;
+		color: white;
+		text-shadow: 2px 2px black;
+		text-align: center;
+		position: absolute;
+		top: 0;
+		transition: top 1s linear .3s;
+		&.animate { top: 1500px; }
+
+		h2 {
+			display: inline-block;
+			margin-right: 10px;
+			font-size: 50px;
+			&.bounceInRight {
+				-webkit-animation-delay: 1s;
+			}
+		}
+		h1 {
+			color: deeppink;
+			font-size: 100px;
+			&.bounceInUp { -webkit-animation-delay: 2s; };
+		}
+	}
+}
+
+@-webkit-keyframes bounceInLeft {
+  0%, 60%, 75%, 90%, 100% {
+	-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+	-webkit-transform: translate3d(-3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+	-webkit-transform: translate3d(25px, 0, 0);
+  }
+
+  75% {
+	-webkit-transform: translate3d(-10px, 0, 0);
+  }
+
+  90% {
+	-webkit-transform: translate3d(5px, 0, 0);
+  }
+
+  100% {
+	-webkit-transform: none;
+  }
+}
+
+@-webkit-keyframes bounceInRight {
+  0%, 60%, 75%, 90%, 100% {
+	-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+	-webkit-transform: translate3d(3000px, 0, 0);
+  }
+
+  60% {
+    opacity: 1;
+	-webkit-transform: translate3d(-25px, 0, 0);
+  }
+
+  75% {
+	-webkit-transform: translate3d(10px, 0, 0);
+  }
+
+  90% {
+	-webkit-transform: translate3d(-5px, 0, 0);
+  }
+
+  100% {
+	-webkit-transform: none;
+  }
+}
+
+
+@-webkit-keyframes bounceInUp {
+  0%, 60%, 75%, 90%, 100% {
+	-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  0% {
+    opacity: 0;
+	-webkit-transform: translate3d(0, 3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+	-webkit-transform: translate3d(0, -25px, 0);
+  }
+
+  75% {
+	-webkit-transform: translate3d(0, 10px, 0);
+  }
+
+  90% {
+	-webkit-transform: translate3d(0, -5px, 0);
+  }
+
+  100% {
+	-webkit-transform: none;
+  }
+}
+
+.bounceInLeft  { -webkit-animation-name: bounceInLeft; }
+.bounceInRight { -webkit-animation-name: bounceInRight; }
+.bounceInUp    { -webkit-animation-name: bounceInUp; }
+.animate {
+	-webkit-animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+}
