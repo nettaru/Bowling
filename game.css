@@ -7,13 +7,13 @@ body {
   background-color: black;
   background-size: contain;
   background-position: center;
-  height: 100%; }
+  height: 100%;
+  text-transform: uppercase;
+  font-family: 'Freckle Face', cursive;
+  color: white;
+  text-shadow: 2px 2px black;
+  text-align: center; }
   #gameContainer #intro {
-    text-transform: uppercase;
-    font-family: 'Freckle Face', cursive;
-    color: white;
-    text-shadow: 2px 2px black;
-    text-align: center;
     position: absolute;
     top: 0;
     transition: top 1s linear .3s; }
@@ -30,6 +30,11 @@ body {
       font-size: 100px; }
       #gameContainer #intro h1.bounceInUp {
         -webkit-animation-delay: 2s; }
+  #gameContainer #frame {
+    opacity: 0;
+    transition: opacity 1s ease; }
+    #gameContainer #frame.animate {
+      opacity: 1; }
 
 @-webkit-keyframes bounceInLeft {
   0%, 60%, 75%, 90%, 100% {
