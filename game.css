@@ -1,5 +1,6 @@
 @import url("http://fonts.googleapis.com/css?family=Freckle+Face");
-body {
+html, body {
+  height: 100%;
   margin: 0; }
 
 #gameContainer {
@@ -13,32 +14,43 @@ body {
   color: white;
   text-shadow: 2px 2px black;
   text-align: center; }
-  #gameContainer #intro {
+  #gameContainer #intro, #gameContainer #outro {
     position: absolute;
-    top: 0;
-    transition: top 1s linear .3s; }
+    transition: top 1s ease .3s; }
+    #gameContainer #intro h2, #gameContainer #outro h2 {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 50px; }
+      #gameContainer #intro h2.bounceInRight, #gameContainer #outro h2.bounceInRight {
+        -webkit-animation-delay: 1s; }
+    #gameContainer #intro h1, #gameContainer #outro h1 {
+      color: deeppink;
+      font-size: 100px; }
+      #gameContainer #intro h1.bounceInUp, #gameContainer #outro h1.bounceInUp {
+        -webkit-animation-delay: 2s; }
+  #gameContainer #intro {
+    top: 0; }
     #gameContainer #intro.animate {
       top: 1500px; }
     #gameContainer #intro .animate {
       -webkit-animation-duration: 1s;
       -webkit-animation-fill-mode: both; }
-    #gameContainer #intro h2 {
-      display: inline-block;
-      margin-right: 10px;
-      font-size: 50px; }
-      #gameContainer #intro h2.bounceInRight {
-        -webkit-animation-delay: 1s; }
-    #gameContainer #intro h1 {
-      color: deeppink;
-      font-size: 100px; }
-      #gameContainer #intro h1.bounceInUp {
-        -webkit-animation-delay: 2s; }
+  #gameContainer #outro {
+    width: 100%;
+    height: 100%;
+    top: 1500px;
+    background-color: rgba(0, 0, 0, 0.6); }
+    #gameContainer #outro.animate {
+      top: 0px; }
   #gameContainer #frame {
     opacity: 0;
     transition: opacity 1s ease;
     position: relative; }
     #gameContainer #frame.animate {
       opacity: 1; }
+    #gameContainer #frame h2 {
+      margin-top: 0;
+      color: cyan; }
     #gameContainer #frame #sideBoard {
       position: absolute;
       right: 20px; }
@@ -47,7 +59,9 @@ body {
         background-color: rgba(255, 255, 255, 0.5);
         padding: 20px;
         font-size: 25px;
-        color: springgreen; }
+        color: springgreen;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px; }
         #gameContainer #frame #sideBoard #counters h3 {
           margin-top: 0; }
         #gameContainer #frame #sideBoard #counters .value {
@@ -62,10 +76,10 @@ body {
           #gameContainer #frame #sideBoard #counters #roll.animate {
             opacity: 0; }
         #gameContainer #frame #sideBoard #counters.spare .roll3 {
-          height: 19px;
+          height: 31px;
           opacity: 1; }
         #gameContainer #frame #sideBoard #counters.strike .roll3, #gameContainer #frame #sideBoard #counters.strike .roll4 {
-          height: 19px;
+          height: 31px;
           opacity: 1; }
       #gameContainer #frame #sideBoard button {
         border: none;
@@ -73,9 +87,13 @@ body {
         text-transform: uppercase;
         font: inherit;
         background-color: aquamarine;
-        border-radius: 3px;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
         font-size: 25px;
-        cursor: pointer; }
+        cursor: pointer;
+        position: absolute;
+        left: 0;
+        width: 100%; }
         #gameContainer #frame #sideBoard button:active, #gameContainer #frame #sideBoard button:hover {
           background-color: #19ffb2; }
         #gameContainer #frame #sideBoard button:focus {

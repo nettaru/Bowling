@@ -6,7 +6,7 @@
 	&.animate { opacity: 1 - $startOpacity; }
 }
 
-body { margin: 0; }
+html, body { height: 100%; margin: 0; }
 
 #gameContainer {
 	background: url("images/background.jpg") no-repeat;
@@ -20,16 +20,9 @@ body { margin: 0; }
 	text-shadow: 2px 2px black;
 	text-align: center;
 
-	#intro {
+	#intro, #outro {
 		position: absolute;
-		top: 0;
-		transition: top 1s linear .3s;
-		&.animate { top: 1500px; }
-
-		.animate {
-			-webkit-animation-duration: 1s;
-			-webkit-animation-fill-mode: both;
-		}
+		transition: top 1s ease .3s;
 
 		h2 {
 			display: inline-block;
@@ -45,9 +38,28 @@ body { margin: 0; }
 			&.bounceInUp { -webkit-animation-delay: 2s; };
 		}
 	}
+	#intro {
+		top: 0;
+		&.animate { top: 1500px; }
+		.animate {
+			-webkit-animation-duration: 1s;
+			-webkit-animation-fill-mode: both;
+		}
+	}
+	#outro {
+		width: 100%;
+		height: 100%;
+		top: 1500px;
+		background-color: rgba(0,0,0,.6);
+		&.animate { top: 0px; }
+	}
 	#frame {
 		@include fadeFrom(0);
 		position: relative;
+		h2 {
+			margin-top: 0;
+			color: cyan;
+		}
 		#sideBoard {
 			position: absolute;
 			right: 20px;
@@ -57,6 +69,8 @@ body { margin: 0; }
 				padding: 20px;
 				font-size: 25px;
 				color: springgreen;
+				border-top-left-radius: 3px;
+				border-top-right-radius: 3px;
 				h3 { margin-top: 0; }
 				.value { margin-left: 10px; }
 				.roll3, .roll4 {
@@ -65,8 +79,8 @@ body { margin: 0; }
 					transition: height .5s ease;
 				}
 				#roll { @include fadeFrom(1); }
-				&.spare  { .roll3 { height: 19px; opacity: 1; } }
-				&.strike { .roll3, .roll4 { height: 19px; opacity: 1; } }
+				&.spare  { .roll3 { height: 31px; opacity: 1; } }
+				&.strike { .roll3, .roll4 { height: 31px; opacity: 1; } }
 			}
 			button {
 				border: none;
@@ -74,9 +88,14 @@ body { margin: 0; }
 				text-transform: uppercase;
 				font: inherit;
 				background-color: aquamarine;
-				border-radius: 3px;
+				border-bottom-left-radius: 3px;
+				border-bottom-right-radius: 3px;
 				font-size: 25px;
 				cursor: pointer;
+				position: absolute;
+				left: 0;
+				width: 100%;
+				
 				&:active, &:hover { background-color: darken(aquamarine, 20%); }
 				&:focus  { outline: none; }
 			}
