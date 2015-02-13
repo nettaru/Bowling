@@ -1,9 +1,9 @@
 @import url('http://fonts.googleapis.com/css?family=Freckle+Face');
 
-@mixin fadeIn() {
-	opacity: 0;
+@mixin fadeFrom($startOpacity: 0) {
+	opacity: $startOpacity;
 	transition: opacity 1s ease;
-	&.animate { opacity: 1; }
+	&.animate { opacity: 1 - $startOpacity; }
 }
 
 body { margin: 0; }
@@ -46,7 +46,7 @@ body { margin: 0; }
 		}
 	}
 	#frame {
-		@include fadeIn();
+		@include fadeFrom(0);
 		position: relative;
 		#sideBoard {
 			position: absolute;
@@ -58,12 +58,14 @@ body { margin: 0; }
 				color: springgreen;
 				h3 { margin-top: 0; }
 				.value { margin-left: 10px; }
-				.roll3, .roll4 { 
+				.roll3, .roll4 {
+					opacity: 0;
 					height: 0;
 					transition: height .5s ease;
 				}
-				&.spare  { .roll3 { height: 19px; } }
-				&.strike { .roll3, .roll4 { height: 19px; } }
+				#roll { @include fadeFrom(1); }
+				&.spare  { .roll3 { height: 19px; opacity: 1; } }
+				&.strike { .roll3, .roll4 { height: 19px; opacity: 1; } }
 			}
 			button {
 				border: none;
@@ -74,6 +76,8 @@ body { margin: 0; }
 				border-radius: 3px;
 				font-size: 25px;
 				cursor: pointer;
+				&:active, &:hover { background-color: darken(aquamarine, 20%); }
+				&:focus  { outline: none; }
 			}
 		}
 	}

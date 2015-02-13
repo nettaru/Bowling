@@ -52,12 +52,20 @@ body {
         #gameContainer #frame #sideBoard #counters .value {
           margin-left: 10px; }
         #gameContainer #frame #sideBoard #counters .roll3, #gameContainer #frame #sideBoard #counters .roll4 {
+          opacity: 0;
           height: 0;
           transition: height .5s ease; }
+        #gameContainer #frame #sideBoard #counters #roll {
+          opacity: 1;
+          transition: opacity 1s ease; }
+          #gameContainer #frame #sideBoard #counters #roll.animate {
+            opacity: 0; }
         #gameContainer #frame #sideBoard #counters.spare .roll3 {
-          height: 19px; }
+          height: 19px;
+          opacity: 1; }
         #gameContainer #frame #sideBoard #counters.strike .roll3, #gameContainer #frame #sideBoard #counters.strike .roll4 {
-          height: 19px; }
+          height: 19px;
+          opacity: 1; }
       #gameContainer #frame #sideBoard button {
         border: none;
         padding: 10px 20px;
@@ -67,6 +75,10 @@ body {
         border-radius: 3px;
         font-size: 25px;
         cursor: pointer; }
+        #gameContainer #frame #sideBoard button:active, #gameContainer #frame #sideBoard button:hover {
+          background-color: #19ffb2; }
+        #gameContainer #frame #sideBoard button:focus {
+          outline: none; }
   #gameContainer #ball {
     background: url("images/ball.png") no-repeat;
     height: 130px;

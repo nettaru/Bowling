@@ -21,11 +21,11 @@
 		})();
 
 		var frame = (function() {
-			var number = 0;
+			var turn = 1;
 			var roll = 1;
 			var rollMax = 2;
 			var $el = jquery('#frame');
-			var $turn = $el.find('#turn label');
+			var $turn = $el.find('#turn .value');
 			var $roll = $el.find('#roll');
 			var $counters = $el.find('#counters');
 			var $score = $el.find('#score .value');
@@ -35,13 +35,23 @@
 				if (numOfPins == 10) {
 					if (roll === 1) {
 						rollMax = 4;
-						counters.addClass('strike');
+						$counters.addClass('strike');
 					} else if (roll === 2) {
 						rollMax = 3;
-						counters.addClass('spare');
+						$counters.addClass('spare');
 					}
 				}
 			});
+
+			$roll.on('transitionend', function(){
+				if ($roll.hasClass('animate')) {
+					$roll.find('.value').text('');
+					$turn.text(turn);
+					$counters.removeClass('strike spare');
+					$roll.removeClass('animate');
+				}
+			});
+
 
 			return {
 				startTurn: function(){
@@ -51,7 +61,14 @@
 				updateCounters: function(score, numOfPins) {
 					$roll.find(".roll" + roll + " .value").text(numOfPins);
 					$score.text(score);
-					roll++;
+					if (roll == rollMax) {
+						roll = 1;
+						rollMax = 2;
+						turn++;
+						$roll.addClass('animate');
+					} else {
+						roll++;						
+					}
 				}
 			}
 		})();
