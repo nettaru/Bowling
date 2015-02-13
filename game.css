@@ -19,6 +19,9 @@ body {
     transition: top 1s linear .3s; }
     #gameContainer #intro.animate {
       top: 1500px; }
+    #gameContainer #intro .animate {
+      -webkit-animation-duration: 1s;
+      -webkit-animation-fill-mode: both; }
     #gameContainer #intro h2 {
       display: inline-block;
       margin-right: 10px;
@@ -32,9 +35,49 @@ body {
         -webkit-animation-delay: 2s; }
   #gameContainer #frame {
     opacity: 0;
-    transition: opacity 1s ease; }
+    transition: opacity 1s ease;
+    position: relative; }
     #gameContainer #frame.animate {
       opacity: 1; }
+    #gameContainer #frame #sideBoard {
+      position: absolute;
+      right: 20px; }
+      #gameContainer #frame #sideBoard #counters {
+        text-align: left;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        color: springgreen; }
+        #gameContainer #frame #sideBoard #counters h3 {
+          margin-top: 0; }
+        #gameContainer #frame #sideBoard #counters .value {
+          margin-left: 10px; }
+        #gameContainer #frame #sideBoard #counters .roll3, #gameContainer #frame #sideBoard #counters .roll4 {
+          height: 0;
+          transition: height .5s ease; }
+        #gameContainer #frame #sideBoard #counters.spare .roll3 {
+          height: 19px; }
+        #gameContainer #frame #sideBoard #counters.strike .roll3, #gameContainer #frame #sideBoard #counters.strike .roll4 {
+          height: 19px; }
+      #gameContainer #frame #sideBoard button {
+        border: none;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font: inherit;
+        background-color: aquamarine;
+        border-radius: 3px;
+        font-size: 25px;
+        cursor: pointer; }
+  #gameContainer #ball {
+    background: url("images/ball.png") no-repeat;
+    height: 130px;
+    width: 130px;
+    background-size: contain;
+    left: 50%;
+    margin-left: -40px;
+    position: absolute;
+    bottom: 3%; }
+    #gameContainer #ball.animate {
+      -webkit-animation: roll 1s; }
 
 @-webkit-keyframes bounceInLeft {
   0%, 60%, 75%, 90%, 100% {
@@ -99,6 +142,16 @@ body {
   100% {
     -webkit-transform: none; } }
 
+@-webkit-keyframes roll {
+  0% {
+    -webkit-transform: rotate(0deg); }
+
+  100% {
+    -webkit-transform: rotate(1080deg);
+    bottom: 65%;
+    height: 20px;
+    width: 20px; } }
+
 .bounceInLeft {
   -webkit-animation-name: bounceInLeft; }
 
@@ -107,7 +160,3 @@ body {
 
 .bounceInUp {
   -webkit-animation-name: bounceInUp; }
-
-.animate {
-  -webkit-animation-duration: 1s;
-  -webkit-animation-fill-mode: both; }

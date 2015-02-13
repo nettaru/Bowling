@@ -1,5 +1,11 @@
 @import url('http://fonts.googleapis.com/css?family=Freckle+Face');
 
+@mixin fadeIn() {
+	opacity: 0;
+	transition: opacity 1s ease;
+	&.animate { opacity: 1; }
+}
+
 body { margin: 0; }
 
 #gameContainer {
@@ -20,6 +26,11 @@ body { margin: 0; }
 		transition: top 1s linear .3s;
 		&.animate { top: 1500px; }
 
+		.animate {
+			-webkit-animation-duration: 1s;
+			-webkit-animation-fill-mode: both;
+		}
+
 		h2 {
 			display: inline-block;
 			margin-right: 10px;
@@ -35,9 +46,47 @@ body { margin: 0; }
 		}
 	}
 	#frame {
-		opacity: 0;
-		transition: opacity 1s ease;
-		&.animate { opacity: 1; }
+		@include fadeIn();
+		position: relative;
+		#sideBoard {
+			position: absolute;
+			right: 20px;
+			#counters {
+				text-align: left;
+				background-color: rgba(255,255,255,0.5);
+				padding: 20px;
+				color: springgreen;
+				h3 { margin-top: 0; }
+				.value { margin-left: 10px; }
+				.roll3, .roll4 { 
+					height: 0;
+					transition: height .5s ease;
+				}
+				&.spare  { .roll3 { height: 19px; } }
+				&.strike { .roll3, .roll4 { height: 19px; } }
+			}
+			button {
+				border: none;
+				padding: 10px 20px;
+				text-transform: uppercase;
+				font: inherit;
+				background-color: aquamarine;
+				border-radius: 3px;
+				font-size: 25px;
+				cursor: pointer;
+			}
+		}
+	}
+	#ball {
+		background: url('images/ball.png') no-repeat;
+		height: 130px;
+		width: 130px;
+		background-size: contain;
+		left: 50%;
+		margin-left: -40px;
+		position: absolute;
+		bottom: 3%;
+		&.animate {	-webkit-animation: roll 1s; }
 	}
 }
 
@@ -125,10 +174,16 @@ body { margin: 0; }
   }
 }
 
+@-webkit-keyframes roll {
+	0% 	 { -webkit-transform: rotate(0deg); }
+	100% { 
+		-webkit-transform: rotate(1080deg);
+		bottom: 65%;
+		height: 20px;
+		width: 20px;
+	}
+}
+
 .bounceInLeft  { -webkit-animation-name: bounceInLeft; }
 .bounceInRight { -webkit-animation-name: bounceInRight; }
 .bounceInUp    { -webkit-animation-name: bounceInUp; }
-.animate {
-	-webkit-animation-duration: 1s;
-	-webkit-animation-fill-mode: both;
-}
