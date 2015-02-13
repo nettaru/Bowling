@@ -3,26 +3,29 @@
 	var game = (function(){
 		var player = (function(){
 			var score = 0;
-			var currentNumOfPins;
+			var pinsDown = 0;
+			var rollScore = 0;
 			$ball = jquery('#ball');
 			$ball.on('webkitAnimationEnd', function(){
 				$ball.removeClass('animate');
-				frame.updateCounters(score, currentNumOfPins);
+				frame.updateCounters(score, pinsDown);
 			});
 
 			return {
-				roll: function(){ 
-					currentNumOfPins = Math.floor(Math.random()*11); 
+				roll: function(rollNum){ 
+					pinsDown = Math.floor(Math.random()*(10 - pinsDown)) + 1; 
 					$ball.addClass('animate');
-					score += currentNumOfPins;
-					return currentNumOfPins;
-				}
+					score += pinsDown;
+					rollScore = rollNum == 1 ? pinsDown : rollScore + pinsDown;
+				},
+				isStrike: function( rollNum ) { return rollNum == 1 & rollScore == 10; },
+				isSpare:  function( rollNum ) { return rollNum == 2 & rollScore == 10; }
 			};
 		})();
 
 		var frame = (function() {
 			var turn = 1;
-			var roll = 1;
+			var rollNum = 1;
 			var rollMax = 2;
 			var $el = jquery('#frame');
 			var $turn = $el.find('#turn .value');
@@ -30,18 +33,7 @@
 			var $counters = $el.find('#counters');
 			var $score = $el.find('#score .value');
 
-			$el.find('button').on('click', function(){
-				var numOfPins = player.roll();
-				if (numOfPins == 10) {
-					if (roll === 1) {
-						rollMax = 4;
-						$counters.addClass('strike');
-					} else if (roll === 2) {
-						rollMax = 3;
-						$counters.addClass('spare');
-					}
-				}
-			});
+			$el.find('button').on('click', function(){ player.roll(rollNum); });
 
 			$roll.on('transitionend', function(){
 				if ($roll.hasClass('animate')) {
@@ -52,22 +44,27 @@
 				}
 			});
 
-
 			return {
-				startTurn: function(){
-					$el.addClass('animate');
-				},
+				startTurn: function(){ $el.addClass('animate'); },
 
 				updateCounters: function(score, numOfPins) {
-					$roll.find(".roll" + roll + " .value").text(numOfPins);
+					$roll.find(".roll" + rollNum + " .value").text(numOfPins);
 					$score.text(score);
-					if (roll == rollMax) {
-						roll = 1;
+					if (player.isStrike(rollNum)) {
+						rollMax = 4;
+						$counters.addClass('strike');
+					} else if (player.isSpare(rollNum)) {
+						rollMax = 3;
+						$counters.addClass('spare');
+					}
+
+					if (rollNum == rollMax) {
+						rollNum = 1;
 						rollMax = 2;
 						turn++;
 						$roll.addClass('animate');
 					} else {
-						roll++;						
+						rollNum++;						
 					}
 				}
 			}
